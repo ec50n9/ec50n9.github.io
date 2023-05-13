@@ -22,18 +22,22 @@ const handleLikeClick = () => {
 </script>
 
 <template>
-  <li class="bg-white text-gray-700 border-b-2 border-b-gray-200">
-    <img v-if="post.cover" :src="post.cover" alt="" />
-    <div class="p-4">
+  <li class="bg-white text-gray-700 border-b-2 border-b-gray-200 rounded-2xl overflow-hidden">
+    <!-- 封面 -->
+    <img v-if="post.cover" class="mb-3" :src="post.cover" alt="" />
+    <!-- 标题 -->
+    <div class="px-4 pb-2">
       <h2 class="inline-block font-bold">{{ post.title }}</h2>
       · <span>{{ new Date(post.add_time).getFullYear() }}</span>
     </div>
-    <ul class="flex gap-x-3 px-4">
+    <!-- 标签 -->
+    <ul class="flex flex-wrap gap-x-2 px-4">
       <li v-for="tag in post.tags" :key="tag" class="text-gray-400 text-sm">
         #{{ tag }}
       </li>
     </ul>
-    <div class="flex posts-center gap-x-4 px-4 pt-1.5 pb-5">
+    <!-- 热度和操作 -->
+    <div class="flex items-center gap-x-4 px-4 pb-3">
       <span class="flex-1 text-gray-400 text-sm font-bold"
         >{{ post.hot }} 热度</span
       >

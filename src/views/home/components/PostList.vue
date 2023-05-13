@@ -21,24 +21,24 @@ const postList = ref([
   {
     _id: "1",
     title: "这是一个测试的标题",
-    cover: "",
+    cover: "https://aqxocp-ec50n9.oss.laf.run/cover-1.jpg",
     add_time: 1620000000000,
     edit_time: 1620000000000,
-    tags: ["测试", "测试2"],
+    tags: ["测试", "测试2", "测试", "测试2", "测试", "测试2", "测试", "测试2", "测试", "测试2"],
     hot: 100,
     liked: false,
   },
 ]);
 
-// const initPostList = ()=>{
-//   fetch("https://aqxocp.laf.run/post-list")
-//     .then(res=>res.json())
-//     .then(res=>res.data.posts)
-//     .then(posts=>{
-//       postList.value = posts
-//     })
-// }
-// initPostList()
+const initPostList = ()=>{
+  fetch("https://aqxocp.laf.run/post-list")
+    .then(res=>res.json())
+    .then(res=>res.data.posts)
+    .then(posts=>{
+      postList.value = posts
+    })
+}
+initPostList()
 
 const handleLikeClick = (item) => {
   item.liked = !item.liked;
@@ -46,7 +46,7 @@ const handleLikeClick = (item) => {
 </script>
 
 <template>
-  <ul class="post-list flex flex-col gap-y-3 my-4 -mx-4 sm:mx-0">
+  <ul class="post-list flex flex-col gap-y-3 my-4">
     <PostItem
       v-for="item in postList"
       :key="item._id"
