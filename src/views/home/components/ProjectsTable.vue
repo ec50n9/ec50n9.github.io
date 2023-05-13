@@ -41,12 +41,12 @@ const projectsList = [
         <th
           class="px-4 py-2 border-2 border-emerald-600 text-emerald-800 font-flow"
         >
-          Name
+          项目
         </th>
         <th
           class="px-4 py-2 border-2 border-emerald-600 text-emerald-800 font-flow"
         >
-          Link
+          传送门
         </th>
       </tr>
     </thead>
