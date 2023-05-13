@@ -1,0 +1,54 @@
+<script setup>
+import { Icon } from "@vicons/utils";
+import {
+  FavoriteBorderRound,
+  FavoriteRound,
+  ShareRound,
+  MoreHorizRound,
+} from "@vicons/material";
+
+const props = defineProps({
+  post: {
+    type: Object,
+    required: true,
+  },
+});
+
+const emit = defineEmits(["like"]);
+
+const handleLikeClick = () => {
+  emit("like", props.post);
+};
+</script>
+
+<template>
+  <li class="bg-white text-gray-700 border-b-2 border-b-gray-200">
+    <img v-if="post.cover" :src="post.cover" alt="" />
+    <div class="p-4">
+      <h2 class="inline-block font-bold">{{ post.title }}</h2>
+      · <span>{{ new Date(post.add_time).getFullYear() }}</span>
+    </div>
+    <ul class="flex gap-x-3 px-4">
+      <li v-for="tag in post.tags" :key="tag" class="text-gray-400 text-sm">
+        #{{ tag }}
+      </li>
+    </ul>
+    <div class="flex posts-center gap-x-4 px-4 pt-1.5 pb-5">
+      <span class="flex-1 text-gray-400 text-sm font-bold"
+        >{{ post.hot }} 热度</span
+      >
+      <Icon size="28" color="#9CA3AF">
+        <MoreHorizRound />
+      </Icon>
+      <Icon size="22" color="#9CA3AF">
+        <ShareRound />
+      </Icon>
+      <Icon size="24" color="#9CA3AF" @click="handleLikeClick(post)">
+        <FavoriteRound v-if="post.liked" />
+        <FavoriteBorderRound v-else />
+      </Icon>
+    </div>
+  </li>
+</template>
+
+<style scoped></style>
