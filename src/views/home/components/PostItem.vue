@@ -67,7 +67,7 @@ const formatedDate = computed(() => {
         v-for="tag in post.tags"
         :key="tag"
         class="inline-block transition-all duration-500"
-        :class="{ 'px-2 bg-emerald-100 text-emerald-700': unfold }"
+        :class="{ 'px-2 py-0.5 bg-emerald-100 text-emerald-700': unfold }"
       >
         #{{ tag }}
       </li>
