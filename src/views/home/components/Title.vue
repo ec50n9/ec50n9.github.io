@@ -1,3 +1,9 @@
+<script setup>
+import {useWebsiteStore} from "/src/store/websiteStore"
+
+const websiteStore = useWebsiteStore()
+</script>
+
 <template>
   <h1
     class="title inline-block mt-10 sm:mt-20 text-4xl sm:text-5xl text-emerald-800 origin-bottom-right overflow-hidden"
@@ -7,9 +13,9 @@
       class="title__content inline-block"
       style="transform: translateY(-1.3em)"
     >
-      <span class="inline-block">嘿！别来无恙</span><br /><span
+      <span class="inline-block">{{ websiteStore.info.welcome }}</span><br /><span
         class="inline-block"
-        >松葉的蘑菇伞下</span
+        >{{ websiteStore.info.title }}</span
       >
     </div>
   </h1>

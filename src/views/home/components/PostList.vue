@@ -1,14 +1,15 @@
 <script setup>
 import { ref } from "vue";
 import PostItem from "./PostItem.vue";
+import postApi from "/src/api/post";
 
 /**
  * @typedef {Object} Post
  * @property {string} _id id
  * @property {string} title 标题
  * @property {string} cover 封面
- * @property {number} add_time 添加时间
- * @property {number} edit_time 编辑时间
+ * @property {number} add_at 添加时间
+ * @property {number} edit_at 编辑时间
  * @property {string[]} tags 标签列表
  * @property {number} hot 热度值
  * @property {boolean} liked 是否喜欢
@@ -17,26 +18,12 @@ import PostItem from "./PostItem.vue";
 /**
  * @type {Post[]}
  */
-const postList = ref([
-  {
-    _id: "1",
-    title: "这是一个测试的标题",
-    cover: "https://aqxocp-ec50n9.oss.laf.run/cover-1.jpg",
-    add_time: 1620000000000,
-    edit_time: 1620000000000,
-    tags: ["测试", "测试2", "测试", "测试2", "测试", "测试2", "测试", "测试2", "测试", "测试2"],
-    hot: 100,
-    liked: false,
-  },
-]);
+const postList = ref([]);
 
 const initPostList = ()=>{
-  fetch("https://aqxocp.laf.run/post-list")
-    .then(res=>res.json())
-    .then(res=>res.data.posts)
-    .then(posts=>{
-      postList.value = posts
-    })
+  postApi.list().then(posts=>{
+    postList.value = posts
+  })
 }
 initPostList()
 

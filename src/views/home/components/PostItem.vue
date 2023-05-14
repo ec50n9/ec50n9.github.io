@@ -27,11 +27,11 @@ const handleLikeClick = () => {
     class="bg-white text-gray-700 border-b-4 border-b-gray-200 rounded-2xl overflow-hidden"
   >
     <!-- 封面 -->
-    <img v-if="post.cover" class="mb-3" :src="post.cover" alt="" />
+    <img v-if="post.cover" class="mb-3 w-full max-h-48 sm:max-h-56 object-cover" :src="post.cover" alt="" />
     <!-- 标题 -->
     <div class="px-4 pb-2 text-emerald-800">
       <h2 class="inline-block font-bold">{{ post.title }}</h2>
-      · <span>{{ new Date(post.add_time).getFullYear() }}</span>
+      · <span>{{ new Date(post.add_at).getFullYear() }}</span>
     </div>
     <!-- 标签 -->
     <ul class="flex flex-wrap gap-x-2 px-4">
