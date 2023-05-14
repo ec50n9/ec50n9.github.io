@@ -2,7 +2,9 @@
 import { ref } from "vue";
 import PostItem from "./PostItem.vue";
 import postApi from "/src/api/post";
-import {useRouter} from "vue-router"
+import { useRouter } from "vue-router";
+import PostDetails from "./PostDetails.vue";
+import { reactive } from "vue";
 
 /**
  * @typedef {Object} Post
@@ -21,21 +23,47 @@ import {useRouter} from "vue-router"
  */
 const postList = ref([]);
 
-const initPostList = ()=>{
-  postApi.list().then(posts=>{
-    postList.value = posts
-  })
-}
-initPostList()
+const initPostList = () => {
+  postApi.list().then((posts) => {
+    postList.value = posts.map((post) => ({
+      ...post,
+      unfold: false,
+    }));
+  });
+};
+initPostList();
 
-const router = useRouter();
+const currentPost = reactive({
+  post: null,
+  position: {
+    top: 0,
+    left: 0,
+    width: 0,
+    height: 0,
+  },
+});
 
-const handleItemClick = (item) => {
-  router.push(`/post/${item._id}`);
+const handleItemClick = (event, item) => {
+  // const router = useRouter();
+  // router.push(`/post/${item._id}`);
+  currentPost.post = item;
+  const target = event.currentTarget;
+  const rect = target.getBoundingClientRect();
+  // 获取当前点击的元素的顶部距离父元素顶部的距离
+  currentPost.position = {
+    top: rect.top,
+    left: 0,
+    width: rect.width,
+    height: rect.height,
+  }
 };
 
 const handleLikeClick = (item) => {
   item.liked = !item.liked;
+};
+
+const handlePostDetailsClose = () => {
+  currentPost.post = null;
 };
 </script>
 
@@ -45,9 +73,16 @@ const handleLikeClick = (item) => {
       v-for="item in postList"
       :key="item._id"
       :post="item"
-      @click="handleItemClick(item)"
-      @like="handleLikeClick"/>
+      @click="handleItemClick($event, item)"
+      @like="handleLikeClick"
+      :class="{'opacity-0': currentPost.post && currentPost.post._id === item._id}"
+    />
   </ul>
+  <PostDetails
+    :post="currentPost.post"
+    :position="currentPost.position"
+    @close="handlePostDetailsClose"
+  />
 </template>
 
 <style scoped>

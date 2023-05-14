@@ -1,4 +1,5 @@
 <script setup>
+import { computed, watch } from "vue";
 import { Icon } from "@vicons/utils";
 import {
   FavoriteBorderRound,
@@ -13,21 +14,33 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  unfold: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 const emit = defineEmits(["like"]);
 
-const handleLikeClick = () => {
+const handleLikeClick = (event) => {
+  event.stopPropagation();
   emit("like", props.post);
 };
 </script>
 
 <template>
   <li
-    class="bg-white text-gray-700 border-b-4 border-b-gray-200 rounded-2xl overflow-hidden"
+    class="list-none bg-white text-gray-700 border-b-4 border-b-gray-200 overflow-hidden"
+    :class="{ 'rounded-2xl': !unfold }"
   >
     <!-- 封面 -->
-    <img v-if="post.cover" class="mb-3 w-full max-h-48 sm:max-h-56 object-cover" :src="post.cover" alt="" />
+    <img
+      v-if="post.cover"
+      class="mb-3 w-full max-h-48 sm:max-h-56 object-cover"
+      :src="post.cover"
+      alt=""
+    />
     <!-- 标题 -->
     <div class="px-4 pb-2 text-emerald-800">
       <h2 class="inline-block font-bold">{{ post.title }}</h2>
@@ -45,9 +58,7 @@ const handleLikeClick = () => {
         <Icon size="22">
           <LocalFireDepartmentRound />
         </Icon>
-        <span class="text-sm font-bold"
-          >{{ post.hot }} 热度</span
-        >
+        <span class="text-sm font-bold">{{ post.hot }} 热度</span>
       </div>
       <Icon size="28">
         <MoreHorizRound />
@@ -58,7 +69,7 @@ const handleLikeClick = () => {
       <Icon
         :class="{ 'text-emerald-700': post.liked }"
         size="24"
-        @click="handleLikeClick(post)"
+        @click="handleLikeClick"
       >
         <FavoriteRound v-if="post.liked" />
         <FavoriteBorderRound v-else />
