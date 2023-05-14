@@ -40,7 +40,7 @@ const websiteStore = useWebsiteStore()
   50% {
     transform: scale(1.1) translate(calc(21vw), calc(50vh - 12rem)) rotate(0deg);
   }
-  75% {
+  60% {
     transform: scale(1.1) translate(calc(21vw), calc(50vh - 12rem)) rotate(0deg);
   }
   100% {

@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import PostItem from "./PostItem.vue";
 import postApi from "/src/api/post";
+import {useRouter} from "vue-router"
 
 /**
  * @typedef {Object} Post
@@ -27,6 +28,12 @@ const initPostList = ()=>{
 }
 initPostList()
 
+const router = useRouter();
+
+const handleItemClick = (item) => {
+  router.push(`/post/${item._id}`);
+};
+
 const handleLikeClick = (item) => {
   item.liked = !item.liked;
 };
@@ -38,6 +45,7 @@ const handleLikeClick = (item) => {
       v-for="item in postList"
       :key="item._id"
       :post="item"
+      @click="handleItemClick(item)"
       @like="handleLikeClick"/>
   </ul>
 </template>
