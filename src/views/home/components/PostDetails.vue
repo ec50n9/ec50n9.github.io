@@ -17,7 +17,9 @@ const props = defineProps({
 const emit = defineEmits(["close", "fold", "unfold"]);
 
 const visible = ref(false);
+const unfold = ref(false);
 const animationDuration = 500;
+let openAnimationTimeout = null;
 const showCloseAnimation = ref(false);
 
 watch(
@@ -26,7 +28,18 @@ watch(
     if (post) {
       emit("unfold");
       visible.value = true;
+
+      // 动画完成
+      openAnimationTimeout = setTimeout(() => {
+        console.log("动画完成");
+        unfold.value = true;
+      }, 0);
     } else {
+      // 如果还有动画，清除动画
+      if (openAnimationTimeout) {
+        clearTimeout(openAnimationTimeout);
+      }
+
       emit("fold");
       visible.value = false;
     }
@@ -34,6 +47,7 @@ watch(
 );
 
 const handleClose = () => {
+  unfold.value = false;
   showCloseAnimation.value = true;
   setTimeout(() => {
     showCloseAnimation.value = false;
@@ -55,7 +69,7 @@ const handleClose = () => {
 
     <!-- 内容 -->
     <div
-      class="absolute top-0 left-0 bottom-0 right-0 p-0"
+      class="absolute top-0 left-0 bottom-0 right-0 p-0 overflow-auto"
       @click="handleClose"
     >
       <div class="relative container max-w-prose mx-auto">
@@ -66,7 +80,7 @@ const handleClose = () => {
             'post-item--close': showCloseAnimation,
           }"
         >
-          <PostItem :post="post" />
+          <PostItem :post="post" :unfold="unfold" />
         </div>
       </div>
     </div>

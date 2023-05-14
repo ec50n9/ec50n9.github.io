@@ -7,6 +7,9 @@ dependencies:
   animejs:
     specifier: ^3.2.1
     version: 3.2.1
+  dayjs:
+    specifier: ^1.11.7
+    version: 1.11.7
   laf-client-sdk:
     specifier: 1.0.0-beta.8
     version: 1.0.0-beta.8
@@ -646,6 +649,10 @@ packages:
       lodash.clonedeep: 4.5.0
       lodash.set: 4.3.2
       lodash.unset: 4.5.2
+    dev: false
+
+  /dayjs@1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
     dev: false
 
   /didyoumean@1.2.2:

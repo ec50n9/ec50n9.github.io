@@ -8,6 +8,7 @@ const list = () =>
     .field({
       _id: 1,
       title: 1,
+      content: 1,
       cover: 1,
       tags: 1,
       hot: 1,
