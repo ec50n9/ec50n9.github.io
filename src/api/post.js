@@ -14,6 +14,7 @@ const list = () =>
       tags: 1,
       hot: 1,
       liked: 1,
+      type: 1,
       add_at: 1,
       edit_at: 1,
     })

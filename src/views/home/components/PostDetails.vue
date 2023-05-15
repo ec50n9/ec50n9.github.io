@@ -76,6 +76,7 @@ const handleClose = () => {
         <div
           class="post-item absolute left-4"
           :class="{
+            'post-item--sm': post.type === 'sm',
             'post-item--open': !showCloseAnimation,
             'post-item--close': showCloseAnimation,
           }"
@@ -101,10 +102,27 @@ const handleClose = () => {
 }
 
 .post-item {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  --target-top: 0;
+  --target-left: 0;
+  --target-width: 100%;
+  --target-height: 100%;
+
+  top: var(--target-top);
+  left: var(--target-left);
+  width: var(--target-width);
+  height: var(--target-height);
+}
+
+.post-item--sm {
+  --target-top: 14rem;
+  --target-left: 1rem;
+  --target-width: v-bind("position.width+'px'");
+  --target-height: v-bind("position.height+'px'");
+
+  top: var(--target-top);
+  left: var(--target-left);
+  width: var(--target-width);
+  height: var(--target-height);
 }
 
 .post-item--open {
@@ -141,19 +159,19 @@ const handleClose = () => {
     height: v-bind("position.height+'px'");
   }
   100% {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: var(--target-top);
+    left: var(--target-left);
+    width: var(--target-width);
+    height: var(--target-height);
   }
 }
 
 @keyframes post-item--close {
   0% {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: var(--target-top);
+    left: var(--target-left);
+    width: var(--target-width);
+    height: var(--target-height);
   }
   100% {
     top: v-bind("position.top+'px'");

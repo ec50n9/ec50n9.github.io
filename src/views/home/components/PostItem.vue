@@ -39,7 +39,7 @@ const formatedDate = computed(() => {
 <template>
   <li
     class="list-none bg-white text-gray-700 border-b-4 border-b-gray-200 overflow-hidden transition-br ease-out"
-    :class="{ 'rounded-2xl': !unfold }"
+    :class="{ 'rounded-2xl': !unfold||post.type==='sm' }"
   >
     <!-- 封面 -->
     <img
