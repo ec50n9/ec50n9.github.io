@@ -34,7 +34,7 @@ const projectsList = [
 
 <template>
   <table
-    class="projects-table table-auto w-full mt-6 sm:mt-8 text-center border-collapse"
+    class="projects-table table-auto w-full text-center border-collapse"
   >
     <thead class="bg-emerald-200">
       <tr>

@@ -1,7 +1,8 @@
 import cloud from "./cloud";
 
 const db = cloud.database();
-const collection = db.collection("ec-website-info");
+const infoCollection = db.collection("ec-website-info");
+const commentCollection = db.collection("ec-website-comments");
 
 const ramdomPickHandler = (value) => {
   if (!Array.isArray(value)) return value;
@@ -16,7 +17,7 @@ const infoValueHandlers = {
 };
 
 const getInfo = () =>
-  collection
+  infoCollection
     .where({
       _id: "6460519460a6862710aa02d6",
     })
@@ -41,6 +42,16 @@ const getInfo = () =>
       return result;
     });
 
+const listComments = () =>
+  commentCollection
+    .field({
+      _id: 1,
+      content: 1,
+    })
+    .get()
+    .then((res) => res.data);
+
 export default {
   getInfo,
+  listComments,
 };

@@ -5,6 +5,7 @@ const collection = db.collection("ec-posts");
 
 const list = () =>
   collection
+    .orderBy("add_at", "desc")
     .field({
       _id: 1,
       title: 1,

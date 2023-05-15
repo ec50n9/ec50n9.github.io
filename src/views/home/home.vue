@@ -4,6 +4,7 @@ import ProjectTable from "./components/ProjectsTable.vue";
 import PostList from "./components/PostList.vue";
 import Footer from "./components/Footer.vue";
 import { useWebsiteStore } from "/src/store/websiteStore";
+import BulletComment from "./components/BulletComment.vue";
 
 const websiteStore = useWebsiteStore();
 </script>
@@ -21,8 +22,11 @@ const websiteStore = useWebsiteStore();
       {{ websiteStore.info.sub_title }}
     </p>
 
+    <!-- 弹幕 -->
+    <BulletComment class="mt-6 sm:mt-8" />
+
     <!-- 仓库 -->
-    <ProjectTable />
+    <ProjectTable class="mt-6 sm:mt-8" />
 
     <!-- 帖子列表 -->
     <PostList />

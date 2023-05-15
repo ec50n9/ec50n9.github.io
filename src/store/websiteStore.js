@@ -8,6 +8,7 @@ export const useWebsiteStore = defineStore("website", {
       welcome: "欢迎光临！",
       sub_title: "这里有些新东西哦！",
     },
+    comments: [],
   }),
   getters: {
     welcomeMessage() {
@@ -19,5 +20,9 @@ export const useWebsiteStore = defineStore("website", {
       const info = await websiteApi.getInfo();
       this.info = info;
     },
+    async fetchComments() {
+      const comments = await websiteApi.listComments();
+      this.comments = comments;
+    }
   },
 });
