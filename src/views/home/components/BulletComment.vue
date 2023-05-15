@@ -41,7 +41,7 @@ requestAnimationFrame(move);
 </script>
 
 <template>
-  <div class="relative h-56 overflow-x-hidden">
+  <div class="relative h-56 overflow-hidden">
     <span
       v-for="item in bullectList"
       :key="item.id"
